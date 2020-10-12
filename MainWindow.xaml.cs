@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace TicTacToe
 {
@@ -42,10 +43,13 @@ namespace TicTacToe
             InitializeComponent();
             NewGame();
         }
-                  
+
 
         #endregion
 
+        /// <summary>
+        /// Starts a new gamee clears all values
+        /// </summary>
 
         private void NewGame()
         {
@@ -63,8 +67,35 @@ namespace TicTacToe
             //Interate every button on the grid
             Container.Children.Cast<Button>().ToList().ForEach(button =>
             {
+                //Change background, forground to defaul values.
                 button.Content = string.Empty;
+                button.Background = Brushes.White;
+                button.Foreground = Brushes.Green;
             });
+
+            //make sure the game hasn't finshed
+            mGameEnded = false;
+            
+
+        }
+
+
+        /// <summary>
+        /// Handles a button click event
+        /// </summary>
+        /// <param name="sender">The button that was clicked</param>
+        /// <param name="e">The events of the click</param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if(mGameEnded)
+            {
+                NewGame();
+                return;
+            }
+
+            var button = (Button)sender;
+
+
 
         }
     }
